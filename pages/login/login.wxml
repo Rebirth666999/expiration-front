@@ -1,0 +1,43 @@
+<!-- login.wxml -->
+<view class="login-container">
+  <text class="login-title">欢迎登录</text>
+  
+  <form class="login-form">
+    <view class="label">用户名:</view>
+    <input type="text" value="{{username}}" bindinput="onUsernameInput" class="input" id="username" required placeholder="请输入用户名" />
+
+    <view class="label">密码:</view>
+    <input type="password" value="{{password}}" bindinput="onPasswordInput" class="input" id="password" required placeholder="请输入密码" />
+
+    <button type="button" bindtap="testClick" class="login-btn">登录</button>
+  </form>
+
+  <!-- 注册按钮 -->
+  <button bindtap="showRegisterDialog" class="register-btn">注册新账户</button>
+
+  <!-- 产品说明区域 -->
+  <view class="product-description">
+    <text>产品名称：物品保质期管理。</text>
+    <text>设计该产品的目的：帮助用户管理物品的保质期，提醒用户及时处理快要过期和已经过期的产品。</text>
+    <text>版本：1.0</text>
+    <text>作者：Hiter--PZY</text>
+  </view>
+
+  <!-- 注册弹框 -->
+  <view wx:if="{{showDialog}}" class="dialog-overlay">
+    <view class="dialog">
+      <text>注册新账户</text>
+      <form bindsubmit="register">
+        <view class="label">用户名:</view>
+        <input type="text" value="{{newUsername}}" bindinput="onNewUsernameInput" class="input" id="newUsername" required placeholder="请输入用户名" />
+  
+        <view class="label">密码:</view>
+        <input type="password" value="{{newPassword}}" bindinput="onNewPasswordInput" class="input" id="newPassword" required placeholder="请输入密码" />
+  
+        <button type="submit" class="dialog-btn">注册</button>
+        <button bindtap="closeDialog" type="button" class="dialog-close-btn">关闭</button>
+      </form>
+      <text wx:if="{{dialogMessage}}" class="dialog-message">{{dialogMessage}}</text>
+    </view>
+  </view>
+</view>

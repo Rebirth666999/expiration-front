@@ -1,0 +1,55 @@
+<view class="container">
+  <text class="welcome">欢迎，用户ID: {{userId}}</text>
+
+  <!-- 产品类型筛选 -->
+  <label for="productFilter">筛选产品类型:</label>
+  <picker mode="selector" range="{{productTypes}}" value="{{selectedType}}" bindchange="filterProducts" id="productFilter">
+    <view class="picker">
+      {{selectedType ? productTypes[selectedType] : '请选择产品类型'}}
+    </view>
+  </picker>
+
+  <!-- 产品列表 -->
+  <view class="product-list">
+    <text class="product-title">产品列表</text>
+    <block wx:if="{{products.length > 0}}">
+      <block wx:for="{{products}}" wx:key="id">
+        <view class="product-card">
+          <view class="product-info">
+            <text class="product-name">{{item.productName}}</text>
+            <text class="product-type">{{item.productType}}</text>
+            <text class="product-expiry">过期时间: {{item.expiryDate}}</text>
+          </view>
+          <button bindtap="deleteProduct" data-id="{{item.id}}" class="btn delete-btn">删除</button>
+        </view>
+      </block>
+    </block>
+    <text wx:else class="no-data">没有产品数据。</text>
+  </view>
+
+  <!-- 添加产品按钮 -->
+  <button bindtap="showAddProductDialog" class="btn primary-btn">添加产品</button>
+
+  <!-- 自定义弹框 -->
+  <view wx:if="{{showDialog}}" class="dialog-overlay">
+    <view class="dialog">
+      <text>添加产品</text>
+      <form>
+        <label for="productName">产品名称:</label>
+        <input type="text" value="{{newProduct.productName}}" placeholder="请输入产品名称" bindinput="updateProductName" required />
+
+        <label for="productType">产品类型:</label>
+        <picker mode="selector" range="{{productTypes}}" value="{{newProduct.productType}}" bindchange="updateProductType" id="productType" required>
+          <view class="picker">{{productTypes[newProduct.productType]}}</view>
+        </picker>
+
+        <label for="expiryDate">过期日期:</label>
+        <input type="date" value="{{newProduct.expiryDate}}" bindinput="updateExpiryDate" required />
+
+        <button bindtap="addProduct" class="btn primary-btn">确认</button>
+        <button bindtap="closeDialog" class="btn close-btn">关闭</button>
+      </form>
+      <text wx:if="{{dialogMessage}}" class="dialog-message">{{dialogMessage}}</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/products/products"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}
