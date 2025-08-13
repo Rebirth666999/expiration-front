@@ -30,14 +30,17 @@
       <form bindsubmit="register">
         <view class="label">用户名:</view>
         <input type="text" value="{{newUsername}}" bindinput="onNewUsernameInput" class="input" id="newUsername" required placeholder="请输入用户名" />
-  
+
         <view class="label">密码:</view>
         <input type="password" value="{{newPassword}}" bindinput="onNewPasswordInput" class="input" id="newPassword" required placeholder="请输入密码" />
-  
-        <button type="submit" class="dialog-btn">注册</button>
+
+        <!-- 注册按钮 -->
+        <button bindtap="handleRegisterClick">注册</button>
         <button bindtap="closeDialog" type="button" class="dialog-close-btn">关闭</button>
       </form>
+      <!-- 显示注册消息 -->
       <text wx:if="{{dialogMessage}}" class="dialog-message">{{dialogMessage}}</text>
     </view>
   </view>
+
 </view>

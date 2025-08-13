@@ -1,13 +1,12 @@
 <view class="container">
   <text class="welcome">欢迎，用户ID: {{userId}}</text>
 
-  <!-- 产品类型筛选 -->
-  <label for="productFilter">筛选产品类型:</label>
-  <picker mode="selector" range="{{productTypes}}" value="{{selectedType}}" bindchange="filterProducts" id="productFilter">
-    <view class="picker">
-      {{selectedType ? productTypes[selectedType] : '请选择产品类型'}}
-    </view>
-  </picker>
+  <!-- 筛选产品类型按钮 -->
+  <view class="product-filter">
+    <button bindtap="filterByType" data-type="food" class="btn filter-btn">食物</button>
+    <button bindtap="filterByType" data-type="medicine" class="btn filter-btn">药品</button>
+    <button bindtap="filterByType" data-type="daily_necessity" class="btn filter-btn">日常用品</button>
+  </view>
 
   <!-- 产品列表 -->
   <view class="product-list">
@@ -20,7 +19,8 @@
             <text class="product-type">{{item.productType}}</text>
             <text class="product-expiry">过期时间: {{item.expiryDate}}</text>
           </view>
-          <button bindtap="deleteProduct" data-id="{{item.id}}" class="btn delete-btn">删除</button>
+          <!-- 删除按钮，点击时弹出删除确认对话框 -->
+          <button bindtap="showDeleteDialog" data-id="{{item.id}}" class="btn delete-btn">删除</button>
         </view>
       </block>
     </block>
@@ -30,8 +30,8 @@
   <!-- 添加产品按钮 -->
   <button bindtap="showAddProductDialog" class="btn primary-btn">添加产品</button>
 
-  <!-- 自定义弹框 -->
-  <view wx:if="{{showDialog}}" class="dialog-overlay">
+  <!-- 添加产品对话框 -->
+  <view wx:if="{{showAddProductDialogVisible}}" class="dialog-overlay">
     <view class="dialog">
       <text>添加产品</text>
       <form>
@@ -50,6 +50,17 @@
         <button bindtap="closeDialog" class="btn close-btn">关闭</button>
       </form>
       <text wx:if="{{dialogMessage}}" class="dialog-message">{{dialogMessage}}</text>
+    </view>
+  </view>
+
+  <!-- 删除产品确认对话框 -->
+  <view wx:if="{{showDeleteDialogVisible}}" class="dialog-overlay">
+    <view class="dialog">
+      <text>确认删除该产品吗？</text>
+      <view class="dialog-actions">
+        <button bindtap="deleteProduct" data-id="{{deleteProductId}}" class="btn confirm-btn">确认删除</button>
+        <button bindtap="closeDeleteDialog" class="btn cancel-btn">取消</button>
+      </view>
     </view>
   </view>
 </view>
