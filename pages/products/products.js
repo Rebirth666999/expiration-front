@@ -32,7 +32,7 @@ Page({
   // 加载用户的产品列表
   loadProducts() {
     wx.request({
-      url: `http://123.249.91.173:8080/product/getProductsByUserId/${this.data.userId}`,
+      url: `http://localhost:8080/product/getProductsByUserId/${this.data.userId}`,
       method: "GET",
       success: (res) => {
         console.log(res); // 调试用，查看返回的数据
@@ -54,7 +54,7 @@ Page({
     console.log("筛选产品类型:", selectedType);
 
     // 请求 URL，确保使用正确的 userId 和 selectedType
-    const url = `http://123.249.91.173:8080/product/getProductsByUserIdAndType?userId=${this.data.userId}&productType=${selectedType}`;
+    const url = `http://localhost:8080/product/getProductsByUserIdAndType?userId=${this.data.userId}&productType=${selectedType}`;
 
     // 发送请求
     wx.request({
@@ -112,7 +112,7 @@ Page({
     };
 
     wx.request({
-      url: "http://123.249.91.173:8080/product/add",
+      url: "http://localhost:8080/product/add",
       method: "POST",
       data: requestData,
       success: (res) => {
@@ -153,7 +153,7 @@ Page({
       const productId = this.data.deleteProductId;
   
       wx.request({
-        url: `http://123.249.91.173:8080/product/delete/${productId}`,
+        url: `http://localhost:8080/product/delete/${productId}`,
         method: "DELETE",
         success: () => {
           this.showSuccess("产品删除成功！");

@@ -58,7 +58,7 @@ Page({
   async login(userData) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'http://123.249.91.173:8080/user/login',
+        url: 'http://localhost:8080/user/login',
         method: 'POST',
         data: userData,
         header: {
@@ -82,7 +82,7 @@ Page({
   registerRequest(userData) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: 'http://123.249.91.173:8080/user/register',
+        url: 'http://localhost:8080/user/register',
         method: 'POST',
         data: JSON.stringify(userData), // 确保数据是 JSON 字符串
         header: {
